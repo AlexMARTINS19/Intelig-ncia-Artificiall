@@ -6,91 +6,89 @@ const textoResultado = document.querySelector(".texto-resultado");
 
 const perguntas = [
     {
-        enunciado: Eu gosto ir pro eventos?
+        enunciado: "Eu gosto de ir para eventos?",
         alternativas: [
             {
-                texto: Não
-                afirmacao: Sim
+                texto: "Não",
+                afirmacao: "Sim"
             },
             {
-                texto: Não horrível 
-                afirmacao: Sim maravilhoso 
+                texto: "Não horrível",
+                afirmacao: "Sim maravilhoso"
             }           
-            
         ]
     },
     {
-        enunciado: Fazer churrasco final de semana?
+        enunciado: "Fazer churrasco no final de semana?",
         alternativas: [
             {
-                texto: Não
-                afirmacao: Sim
+                texto: "Não",
+                afirmacao: "Sim"
             },
             {
-                texto: Churrasco com amigos
-                afirmacao: Churrasco com família 
+                texto: "Churrasco com amigos",
+                afirmacao: "Churrasco com família"
             }
         ]
     },
     {
-        enunciado: Eu gosto ir no shopping?
+        enunciado: "Eu gosto de ir no shopping?",
         alternativas: [
             {
-                texto:Não 
-                afirmacao:Sim
+                texto: "Não",
+                afirmacao: "Sim"
             },
             {
-                texto: ficar em casa
-                afirmacao:ir no shopping 
+                texto: "Ficar em casa",
+                afirmacao: "Ir no shopping"
             }
-            
         ]
     },
     {
-        enunciado: você toma uma bebida?
+        enunciado: "Você toma alguma bebida?",
         alternativas: [
             {
-                texto:Não 
-                afirmacao:Sim
+                texto: "Não",
+                afirmacao: "Sim"
             },
             {
-                texto: Sempre 
-                afirmacao: As vezes 
+                texto: "Sempre",
+                afirmacao: "Às vezes"
             }
-            
         ]
     },
     {
-        enunciado: você toma uma bebida final de semana?
+        enunciado: "Você toma alguma bebida no final de semana?",
         alternativas: [
-                texto: Não 
-                afirmacao: Sim
+            {
+                texto: "Não",
+                afirmacao: "Sim"
             },
             {
-                texto: tomar refrigerante 
-                afirmacao:tomar bebida de álcool 
+                texto: "Tomar refrigerante",
+                afirmacao: "Tomar bebida alcoólica"
             }
-            
-            
+        ]
+    }
+];
 
-
-let atual = 0; 
+let atual = 0;
 let perguntaAtual;
 let historiaFinal = "";
 
 function mostraPergunta() {
-    if(atual >= perguntas.length){
+    if (atual >= perguntas.length) {
         mostraResultado();
         return;
     }
     perguntaAtual = perguntas[atual];
     caixaPerguntas.textContent = perguntaAtual.enunciado;
-    caixaAlternativas.textContent = "";
+    caixaAlternativas.innerHTML = ""; // Limpa o conteúdo anterior das alternativas
     mostraAlternativas();
 }
 
-function mostraAlternativas(){
-    for(const alternativa of perguntaAtual.alternativas){
+function mostraAlternativas() {
+    for (const alternativa of perguntaAtual.alternativas) {
         const botaoAlternativas = document.createElement("button");
         botaoAlternativas.textContent = alternativa.texto;
         botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
@@ -98,17 +96,18 @@ function mostraAlternativas(){
     }
 }
 
-function respostaSelecionada(opcaoSelecionada){
-    const afirmacoes = opcaoSelecionada.afirmacao;
-    historiaFinal += afirmacoes + " ";
+function respostaSelecionada(opcaoSelecionada) {
+    const afirmacao = opcaoSelecionada.afirmacao;
+    historiaFinal += afirmacao + " ";
     atual++;
     mostraPergunta();
 }
 
-function mostraResultado(){
+function mostraResultado() {
     caixaPerguntas.textContent = "Em 2049...";
     textoResultado.textContent = historiaFinal;
-    caixaAlternativas.textContent = ""; 
+    caixaAlternativas.innerHTML = ""; // Limpa o conteúdo das alternativas
 }
 
 mostraPergunta();
+
